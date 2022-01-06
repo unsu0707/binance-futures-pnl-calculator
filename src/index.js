@@ -55,7 +55,7 @@ exports.handler = async (event) => {
     let winCount = 0;
     for (let orderId in orderPnl[symbol]) {
       pnl += orderPnl[symbol][orderId][0];
-      cnt++;
+      orderCount++;
       if (orderPnl[symbol][orderId][0] > 0) winCount++;
       pnls.push(orderPnl[symbol][orderId][0].toFixed(1));
       orderCount++;
