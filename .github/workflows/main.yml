@@ -10,8 +10,6 @@ jobs:
     permissions:
       id-token: write
       contents: read
-    env:
-      WORK_DIR: ./CalcProfitLoss
     steps:
       - name: Checkout
         uses: actions/checkout@v2
