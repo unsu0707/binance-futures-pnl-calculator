@@ -1,0 +1,30 @@
+name: Deploy AWS Lambda with Github Actions
+
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    env:
+      WORK_DIR: ./CalcProfitLoss
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          ref: main
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: ${{ secrets.ROLE_ARN }}
+          aws-region: ap-northeast-1
+      - name: zip source code
+        run: |
+          cd src;zip -r ../package.zip .
+      - name: deploy lambda function
+        run: |
+          aws lambda update-function-code --function-name CalcProfitLoss --zip-file fileb://package.zip --publish
