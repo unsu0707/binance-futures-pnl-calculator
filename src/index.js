@@ -58,7 +58,6 @@ exports.handler = async (event) => {
       orderCount++;
       if (orderPnl[symbol][orderId][0] > 0) winCount++;
       pnls.push(orderPnl[symbol][orderId][0].toFixed(1));
-      orderCount++;
     }
     allPnl += pnl;
     console.log(
